@@ -38,6 +38,8 @@ char c, temp, nonTerminal; int i=0; bool flag = true;
 char null_list[7];
 int null_counter = 0;
 
+//node_t * shoot = malloc(sizeof(node_t));
+//head = current;
 
 int main() {
     node_t * head = malloc(sizeof(node_t));
@@ -111,7 +113,8 @@ char traversal(node_t * root) {
         for(i=0; i<7; i++) {
             if(root->arr[i] == '$'){
                 null_list[null_counter] = root->arr[0];
-                null_counter++;   
+                null_counter++;
+                
             }
         }
         root = root->next;
@@ -124,7 +127,7 @@ char rightTraversal(node_t * root, char c){
         for(int i=1; i<7; i++){
             if(shoot->arr[i] == c){
                 node_t * temp_node = malloc(sizeof(node_t));
-                /*printf("%c\n", shoot->arr[0] S);*/
+                /*printf("%c\n", shoot->arr[0]);*/
                 
                 for(int i=0; i<7; i++){
                     temp_node->arr[i] = shoot->arr[i];
@@ -137,9 +140,9 @@ char rightTraversal(node_t * root, char c){
                 }
                 temp_node->next = shoot->next;
                 shoot->next = temp_node;
+                break;
                 //shoot->next = malloc(sizeof(node_t));
-                shoot = shoot->next;
-                
+                //shoot = shoot->next;
             }
         }
         shoot = shoot->next;
