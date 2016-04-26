@@ -7,39 +7,36 @@ S>ABAC
 A>aA|$
 B>bB|$
 C>c
-  
-SABAC
-AaA
-A$
-BbB
-B$
-Cc
-
-SABAC
-SABC
-SBAC
-SBC
-AaA
-BbB
-Bb
-Cc
 */
+/*List produced  
+    SABAC
+    AaA
+    A$
+    BbB
+    B$
+    Cc*/
+/*Desired Result
+    SABAC
+    SABC
+    SBAC
+    SBC
+    AaA
+    BbB
+    Bb
+    Cc*/
 typedef struct node {
-    //int val;
     struct node * next;
     //struct node * prev;
     char arr[7];//the array to save CFG per line
     }node_t;
 char print_list(node_t * root);
-char first_set(node_t * root,char c);
-char traversal(node_t * root);
-char rightTraversal(node_t * root,char);
+//char first_set(node_t * root,char c);
+char traversal(node_t * root);//To see which nodes have null productions
+char rightTraversal(node_t * root,char);//Passing the nodes which have null production then removing them from list.
 char c, temp, nonTerminal; int i=0; bool flag = true;
 char null_list[7];
 int null_counter = 0;
 
-//node_t * shoot = malloc(sizeof(node_t));
-//head = current;
 
 int main() {
     node_t * head = malloc(sizeof(node_t));
@@ -85,18 +82,15 @@ int main() {
     }
     fclose(fp);
     root = head;
-    //printf("Enter the non-terminal to find first set of\n");
-    //scanf("%c", &nonTerminal);
-    //printf("The first set of %c: ", nonTerminal);
-    //first_set(root,nonTerminal);
-   // print_list(root);
+    
    traversal(root);
      /*for(int j=0; j<7; j++){
          if(null_list[j] != '#'){
         printf("%c\n",null_list[j]);
          }
     }*/
-   rightTraversal(root, null_list[0]); 
+   rightTraversal(root, null_list[0]);
+   rightTraversal(root, null_list[1]); 
 }
 char print_list(node_t * root) {
     while(root->next != NULL){
@@ -149,39 +143,3 @@ char rightTraversal(node_t * root, char c){
     }
         print_list(root);   
 }
-/*
-
-S>A|B
------
-S>A
-S>B
-====
-S>ABAC
-  ^
-
-1. S>ABAC 
-2. now temp = S BAC 
-3. S>ABC
-4. S>BC
-5. A>aA
-
-
-*/
-
-/*char first_set(node_t * root,char c){
-    node_t * shoot = root;
-    while(shoot->next != NULL){
-        if(shoot->arr[i] == c){
-            if(!(isupper(shoot->arr[i+1]))){
-                //first_set(shoot,shoot->arr[i+1]);
-                  printf("{%c}",shoot->arr[i+1]);
-                  //break;  
-                } else{
-                     first_set(shoot,shoot->arr[i+1]);
-              }
-          }
-          shoot = shoot->next;
-    }
-    printf("\n");
-    return 0;
-}*/
